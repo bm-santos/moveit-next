@@ -8,7 +8,8 @@
     flex-direction: column;
 }
 
-section.container {
+.container section {
+    padding-top: 6rem;
     flex: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
