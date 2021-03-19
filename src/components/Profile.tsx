@@ -1,4 +1,4 @@
-import styles from '../../styles/components/Profile.module.css';
+import styles from '../styles/components/Profile.module.css';
 
 export function Profile() {
     return (
@@ -7,7 +7,7 @@ export function Profile() {
             <div>
                 <strong>Bruno Santos</strong>
                 <p>
-                    <img src="icons/level.svg" alt=""/>
+                    <img src="icons/level.svg" alt="" />
                     Level 1
                 </p>
             </div>

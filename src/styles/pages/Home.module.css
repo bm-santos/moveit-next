@@ -1,5 +1,5 @@
 .container {
-    height: 100vh;
+    height: 90vh;
     max-width: 992px;
     margin: 0 auto;
     padding: 2.5rem 2rem;
@@ -9,7 +9,7 @@
 }
 
 .container section {
-    padding-top: 6rem;
+    padding-top: 4rem;
     flex: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
