@@ -4,10 +4,12 @@ import challenges from '../../challenges.json'
 
 import Cookies from 'js-cookie'
 import { LevelUpModal } from '../components/LevelUpModal';
+import { LanguageModal } from '../components/LanguageModal';
 
 interface Challenge {
     type: 'body' | 'eye',
     description: string,
+    descriptionEn: string,
     amount: number
 }
 
@@ -21,13 +23,17 @@ interface ChallengesContextData {
     startNewChallenge: () => void,
     resetChallenge: () => void,
     completeChallenge: () => void,
-    closeLevelUpModal: () => void
+    closeLevelUpModal: () => void,
+    setEnLanguage: () => void,
+    setPtLanguage: () => void,
+    language: string
 }
 interface ChallengesProviderProps {
     children: ReactNode;
     level: number,
     currentExperience: number,
     challengesCompleted: number,
+    language: string
 }
 
 export const ChallengesContext = createContext({} as ChallengesContextData);
@@ -37,6 +43,8 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
     const [currentExperience, setCurrentExperience] = useState(rest.currentExperience ?? 0);
     const [challengesCompleted, setChallengesCompleted] = useState(rest.challengesCompleted ?? 0);
     const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false)
+    const [isLanguageModalOpen, setIsLanguageModalOpen] = useState(false)
+    const [language, setLanguage] = useState('en')
 
     const [activeChallenge, setActiveChallenge] = useState(null);
 
@@ -44,6 +52,7 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
 
     useEffect(() => {
         Notification.requestPermission()
+        setIsLanguageModalOpen(true)
     }, [])
 
     useEffect(() => {
@@ -66,10 +75,26 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
         new Audio('./notification.mp3').play()
 
         if (Notification.permission === 'granted') {
-            new Notification('Novo desafio 🎉', {
-                body: `Valendo ${challenge.amount} xp!`
-            })
+            if (language === 'en') {
+
+                new Notification('New challenge 🎉', {
+                    body: `You'll earn ${challenge.amount} xp!`
+                })
+            } else {
+
+                new Notification('Novo desafio 🎉', {
+                    body: `Valendo ${challenge.amount} xp!`
+                })
+            }
         }
+    }
+    function setEnLanguage() {
+        setLanguage('en')
+        setIsLanguageModalOpen(false)
+    }
+    function setPtLanguage() {
+        setLanguage('pt')
+        setIsLanguageModalOpen(false)
     }
 
     function resetChallenge() {
@@ -107,10 +132,14 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
                 activeChallenge,
                 resetChallenge,
                 completeChallenge,
-                closeLevelUpModal
+                closeLevelUpModal,
+                setEnLanguage,
+                setPtLanguage,
+                language
             }}>
             {children}
             {isLevelUpModalOpen && <LevelUpModal />}
+            {isLanguageModalOpen && <LanguageModal />}
         </ChallengesContext.Provider>
 
     )

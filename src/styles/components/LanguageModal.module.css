@@ -1,0 +1,44 @@
+.overlay {
+    background: rgba(242, 243, 245, 0.9);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    background: var(--white);
+    width: 100%;
+    max-width: 450px;
+    padding: 2rem 3rem;
+    border-radius: 5px;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    margin: 0 auto;
+}
+
+.container strong {
+    font-size: 2.25rem;
+    color: var(--title);
+}
+
+.container p {
+    font-size: 1.25rem;
+    color: var(--text);
+}
+
+.container button {
+    background: transparent;
+    border: 0;
+    padding: 2rem;
+    text-align: center;
+    width: 10rem;
+}
+
+.container img {
+    width: 50px;
+}

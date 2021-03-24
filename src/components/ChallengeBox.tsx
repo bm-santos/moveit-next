@@ -6,7 +6,7 @@ import { CountdownContext } from '../contexts/CountdownContext';
 import styles from '../styles/components/ChallengeBox.module.css'
 
 export function ChallengeBox() {
-    const { activeChallenge, resetChallenge, completeChallenge } = useContext(ChallengesContext);
+    const { language, activeChallenge, resetChallenge, completeChallenge } = useContext(ChallengesContext);
     const { resetCountdown } = useContext(CountdownContext)
 
     function handleChallengeSucceeded() {
@@ -22,11 +22,33 @@ export function ChallengeBox() {
         <div className={styles.challengeBoxContainer}>
             {activeChallenge ? (
                 <div className={styles.challengeActive}>
-                    <header>Ganhe {activeChallenge.amount} xp</header>
+                    <header>
+                        {language === 'en'
+                            ?
+                            <>
+                                Earn {activeChallenge.amount} xp
+                            </>
+                            :
+                            <>
+                                Ganhe {activeChallenge.amount} xp
+                            </>
+                        }
+                    </header>
                     <main>
                         <img src={`icons/${activeChallenge.type}.svg`} alt="Level Up" />
-                        <strong>Novo desafio</strong>
-                        <p>{activeChallenge.description}</p>
+                        {language === 'en'
+                            ?
+                            <>
+
+                                <strong>New challenge</strong>
+                                <p>{activeChallenge.descriptionEn}</p>
+                            </>
+                            :
+                            <>
+                                <strong>Novo desafio</strong>
+                                <p>{activeChallenge.description}</p>
+                            </>
+                        }
 
                     </main>
                     <footer>
@@ -35,23 +57,64 @@ export function ChallengeBox() {
                             className={styles.challengeFailedButton}
                             onClick={handleChallengeFailed}
                         >
-                            Falhei</button>
+                            {language === 'en'
+                                ?
+                                <>
+
+                                    I failed
+                                </>
+                                :
+                                <>
+                                    Falhei
+                                </>
+                            }
+                        </button>
                         <button
                             type="button"
                             className={styles.challengeSucceededButton}
                             onClick={handleChallengeSucceeded}
                         >
-                            Completei
+                            {language === 'en'
+                                ?
+                                <>
+
+                                    I completed
+                                </>
+                                :
+                                <>
+                                    Completei
+                                </>
+                            }
                         </button>
                     </footer>
                 </div>
             ) : (
                 <div className={styles.challengeNotActive}>
-                    <strong>Finalize um ciclo para receber um desafio</strong>
+                    <strong>
+                        {language === 'en'
+                            ?
+                            <>
+                                Complete a cycle to receive a new challenge
+                            </>
+                            :
+                            <>
+                                Finalize um ciclo para receber um desafio
+                            </>
+                        }
+                    </strong>
                     <p>
                         <img src="icons/level-up.svg" alt="Level Up" />
-                    Avance de nível completando desafios.
-                </p>
+                        {language === 'en'
+                            ?
+                            <>
+                                Complete challenges to go to the next level.
+                            </>
+                            :
+                            <>
+                                Avance de nível completando desafios.
+                            </>
+                        }
+                    </p>
                 </div>
             )}
         </div>

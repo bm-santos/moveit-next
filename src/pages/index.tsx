@@ -14,6 +14,7 @@ interface HomeProps {
   level: number,
   currentExperience: number,
   challengesCompleted: number,
+  language: string,
 }
 
 export default function Home(props: HomeProps) {
@@ -22,6 +23,7 @@ export default function Home(props: HomeProps) {
       level={props.level}
       currentExperience={props.currentExperience}
       challengesCompleted={props.challengesCompleted}
+      language={props.language}
     >
       <div className={styles.container}>
         <Head>

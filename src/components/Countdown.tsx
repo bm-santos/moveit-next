@@ -15,7 +15,7 @@ export function Countdown() {
         seconds,
         startCountdown
     } = useContext(CountdownContext)
-    const { startNewChallenge, resetChallenge } = useContext(ChallengesContext)
+    const { language, startNewChallenge, resetChallenge } = useContext(ChallengesContext)
 
     const [minuteLeft, minuteRight] = String(minutes).padStart(2, '0').split('');
     const [secondLeft, secondRight] = String(seconds).padStart(2, '0').split('');
@@ -37,7 +37,16 @@ export function Countdown() {
             {hasFinished ? (
                 <button disabled
                     className={styles.countdownButton}>
-                    Ciclo encerrado
+                    {language === 'en'
+                        ?
+                        <>
+                            Cycle has finished
+                        </>
+                        :
+                        <>
+                            Ciclo encerrado
+                        </>
+                    }
                 </button>
             ) : (
                 <>
@@ -45,13 +54,32 @@ export function Countdown() {
                         <button type="button"
                             className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
                             onClick={resetCountdown}
-                        > Abandonar ciclo
+                        >
+                            {language === 'en'
+                                ?
+                                <>
+                                    Cancel cycle
+                                </>
+                                :
+                                <>
+                                    Abandonar ciclo
+                                </>
+                            }
                         </button>
                     ) : (
                         <button type="button"
                             className={styles.countdownButton}
                             onClick={startCountdown}>
-                            Iniciar um ciclo
+                            {language === 'en'
+                                ?
+                                <>
+                                    Start cycle
+                                </>
+                                :
+                                <>
+                                    Iniciar um ciclo
+                                </>
+                            }
                         </button>
                     )}
                 </>
